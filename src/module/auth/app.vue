@@ -10,8 +10,9 @@
       div.logo
         img(src="./assets/imgs/logo-big.png")
       div.gl-title.larger.white
-        h1.csscdce7ba631a38c.title- 竞彩平台
-        h5.title- 登录页面
+        h1.title- WELCOME
+        h1.title- 竞彩数据中心
+        h5.title- Minimal Admin Theme
       div.gl-blur !{`<div class="gl-blur-mask" /><canvas class="gl-blur-canvas" ref="panelBlurCanvas"/>`}
       GlTextBox(label="请输入账号", v-model="username", :labelFloat="true", :canParse="false")
       GlTextBox(label="请输入密码", v-model="password", :labelFloat="true", type="password")

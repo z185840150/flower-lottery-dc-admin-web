@@ -1,3 +1,7 @@
+@import url("https://fonts.cat.net/css?family=Roboto+Slab");
+@import url("https://fonts.cat.net/css?family=Fredericka+the+Great");
+@import url("https://fonts.cat.net/css?family=Josefin+Sans");
+
 #login {
   border-radius: 0;
   box-shadow: 0 0 50px 10px rgba(0, 0, 0, .25);
@@ -17,11 +21,12 @@
   }
   .gl-title {
     h1 {
-      font-family: "youyuan", "Microsoft YaHei", serif;
+      font-family: "Josefin Sans", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+      font-weight: 400;
       text-transform: uppercase;
     }
     h5 {
-      font-family: "youyuan", "Microsoft YaHei", sans-serif;
+      font-family: "Josefin Sans", "Microsoft YaHei", Helvetica, sans-serif;
       font-weight: 300;
     }
   }
