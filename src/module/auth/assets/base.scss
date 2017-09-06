@@ -1,0 +1,44 @@
+#login {
+  border-radius: 0;
+  box-shadow: 0 0 50px 10px rgba(0, 0, 0, .25);
+  height: 100%;
+  margin: 0 auto;
+  padding: 40px 30px 30px;
+  position: relative;
+  top: 0;
+  min-width: 250px;
+  .logo {
+    margin-bottom: 20px;
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 160px;
+    }
+  }
+  .gl-title {
+    h1 {
+      font-family: "youyuan", "Microsoft YaHei", serif;
+      text-transform: uppercase;
+    }
+    h5 {
+      font-family: "youyuan", "Microsoft YaHei", sans-serif;
+      font-weight: 300;
+    }
+  }
+  .gl-textbox {
+    .gl-textbox-label {
+      color: rgba(0, 0, 0, 0.6)
+    }
+    .gl-textbox-input {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    .gl-textbox-line {
+      background-color: #000
+    }
+    &.label-float.on-focus {
+      .gl-textbox-label {
+        color: #000
+      }
+    }
+  }
+}

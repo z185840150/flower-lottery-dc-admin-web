@@ -1,0 +1,416 @@
+/*
+ * name: glacier default style scss
+ *
+ * author: chameleon
+ * time: 2017 08 18 15:41:27
+ *
+ */
+
+$primary-color: #0D86D1 !default;
+$primary-color-light: false !default;
+$primary-color-dark: false !default;
+$error-color: #FE2424 !default;
+$error-color-light: false !default;
+$error-color-dark: false !default;
+
+@if not $primary-color-light {
+  $primary-color-light: lighten($primary-color, 15%);
+}
+@if not $primary-color-dark {
+  $primary-color-dark: darken($primary-color, 15%);
+}
+@if not $error-color-light {
+  $error-color-light: lighten($error-color, 15%);
+}
+@if not $error-color-dark {
+  $error-color-dark: darken($error-color, 15%);
+}
+
+// Font
+@import url('./../../components/glacier/font/iconfont.scss');
+
+
+// Animate
+$transition-default: 0.33s;
+$transition-default-all: all $transition-default;
+$transition-elasticity: 0.33s cubic-bezier(.5, -.6, .6, 1.5);
+$transition-elasticity-all: all $transition-elasticity;
+// TextBox
+$textbox-color: #000;
+$textbox-background-color: #fff;
+$textbox-label-color: rgba(0, 0, 0, .33);
+$textbox-label-color-focus: $primary-color;
+$textbox-label-float-scale: 1.2;
+$textbox-label-float-scale-focus: 0.8;
+$textbox-border-color: rgba(0, 0, 0, .15);
+$textbox-border-color-error: rgba(254, 36, 36, 0.55);
+$textbox-border-radius: 5px;
+$textbox-error-color: $error-color;
+$textbox-line-color: $primary-color;
+
+
+$textbox-float-label-color: rgba(0, 0, 0, .55);
+$textbox-float-label-color-focus: $primary-color;
+$textbox-float-label-scale-focus: 0.85;
+$textbox-float-border-color-error: rgba(254, 36, 36, 0.55);
+$textbox-float-line-color: $textbox-float-label-color-focus;
+$textbox-float-line-color-error: #F64840;
+
+// resize
+h1, h2, h3, h4, h5, h6 {
+  margin: 0
+}
+// glacier wallpaper
+.gl-wallpaper {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  >img {
+    max-width: inherit;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+.gl-blur {
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  >.gl-blur-mask {
+    background-color: #d7d7d7;
+    height: 100%;
+    opacity: 0.5;
+    position: absolute;
+    width: 100%;
+  }
+  >.gl-blur-canvas {
+    -webkit-filter: brightness(1.5) saturate(1.5) contrast(1.5);
+    -moz-filter: brightness(1.5) saturate(1.5) contrast(1.5);
+    filter: brightness(1.5) saturate(1.5) contrast(1.5);
+    left: 0;
+    max-width: inherit;
+    position: absolute;
+    top: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: -1;
+  }
+}
+// component
+.gl-textbox {
+  margin-top: 17px;
+  margin-bottom: 16px;
+  position: relative;
+  &.fullWidth { width: 100% }
+  .gl-textbox-label-space {
+    display: none;
+  }
+  .gl-textbox-label {
+    color: $textbox-label-color;
+    cursor: text;
+    font-size: 12px;
+    padding: 6px 12px;
+    position: absolute;
+    pointer-events: none;
+    transition: $transition-elasticity-all;
+  }
+  .gl-textbox-input {
+    background: $textbox-background-color;
+    border: 1px solid $textbox-border-color;
+    border-radius: $textbox-border-radius;
+    color: $textbox-color;
+    outline: none;
+    padding: 6px 12px;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 0 #000;
+    transition: $transition-default-all;
+    width: 100%;
+  }
+  .gl-textbox-line {
+    background-color: $textbox-line-color;
+    display: none;
+  }
+  .gl-textbox-error {
+    color: $textbox-error-color;
+    display: none;
+    padding-left: 15px;
+    position: absolute;
+    transform: scale(0.8);
+    transform-origin: left top;
+  }
+  .gl-textbox-btns {
+    background-color: transparent;
+    bottom: 2px;
+    position: absolute;
+    right: 2px;
+    .gl-textbox-btn {
+      float: right;
+      text-align: center;
+      .gl-icon {
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 12px;
+        opacity: 0.2;
+        padding: 2px;
+        transition: $transition-default-all;
+        &.gl-icon-active {
+          background-color: rgba(0, 0, 0, 0.25);
+          color: #fff;
+          opacity: 1;
+        }
+      }
+      .gl-icon:hover  {
+        background-color: rgba(0, 0, 0, .25);
+        color: #fff;
+        opacity: 1;
+      }
+      .gl-icon:active  {
+        background-color: rgba(0, 0, 0, .5);
+      }
+    }
+  }
+  &.on-focus {
+    .gl-textbox-input {
+      border-color: $textbox-label-color-focus;
+      box-shadow: 0 0 2px 1px $textbox-label-color-focus;
+    }
+    .gl-textbox-btns {
+      .gl-textbox-btn {
+        .gl-icon {
+          opacity: 1
+        }
+      }
+    }
+  }
+  &.no-empty {
+    .gl-textbox-label { opacity: 0; }
+  }
+  &.has-error {
+    .gl-textbox-input {
+      border: 1px solid $textbox-border-color-error;
+    }
+    .gl-textbox-error { display: block; }
+  }
+  &.has-error.on-focus {
+    .gl-textbox-input {
+      border-color: $textbox-error-color;
+      box-shadow: 0 0 2px 1px $textbox-error-color;
+    }
+  }
+  &.label-float {
+    .gl-textbox-label-space {
+      display: block;
+      opacity: 0;
+      transform: scale($textbox-label-float-scale-focus)
+    }
+    .gl-textbox-label {
+      color: $textbox-label-color;
+      padding: 0;
+      top: 50%;
+      transform-origin: left center;
+      transform: scale($textbox-label-float-scale)
+    }
+    .gl-textbox-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid $textbox-border-color;
+      border-radius: 0;
+      padding: 0;
+      transition: $transition-default-all;
+    }
+    .gl-textbox-line {
+      background-color: $textbox-line-color;
+      display: block;
+      height: 2px;
+      left: 50%;
+      margin: -2px auto 0;
+      opacity: 0;
+      position: absolute;
+      top: 100%;
+      transition: $transition-elasticity-all;
+      width: 0%;
+    }
+    .gl-textbox-error { padding: 0; }
+  }
+  &.label-float.on-focus {
+    .gl-textbox-label {
+      color: $textbox-float-label-color-focus;
+      font-weight: bolder;
+      opacity: 1;
+      top: 0%;
+      transform: scale($textbox-float-label-scale-focus);
+    }
+    .gl-textbox-input {
+      border-color: transparent;
+      box-shadow: none;
+    }
+    .gl-textbox-line {
+      left: 0%;
+      opacity: 1;
+      width: 100%;
+    }
+  }
+  &.label-float.no-empty {
+    .gl-textbox-label {
+      opacity: 1;
+      top: 0%;
+      transform: scale($textbox-float-label-scale-focus)
+    }
+  }
+  &.label-float.has-error {
+    .gl-textbox-label { color: $textbox-border-color-error; }
+    &.no-empty > .gl-textbox-label, &.on-focus > .gl-textbox-label { color: $textbox-error-color; }
+    .gl-textbox-input { border-bottom: 1px solid $textbox-border-color-error; }
+    .gl-textbox-line { background-color: $textbox-float-line-color-error; }
+    .gl-textbox-error { display: block; }
+  }
+  &.label-static:not(.label-float) {
+    .gl-textbox-label {
+      border-right: 1px solid $textbox-border-color;
+      font-size: 12px;
+      overflow: hidden;
+      padding: 0 12px;
+      top: 2px;
+      text-align: right;
+      text-overflow: ellipsis;
+      transform: scale(1);
+      white-space: nowrap;
+    }
+    .gl-textbox-input {
+      padding-left: 112px;
+    }
+  }
+  &.label-static:not(.label-float).on-focus {
+    .gl-textbox-label {
+      color: $textbox-float-label-color-focus;
+    }
+  }
+  &.label-static:not(.label-float).no-empty {
+    .gl-textbox-label {
+      opacity: 1;
+    }
+  }
+  &.label-static:not(.label-float).has-error {
+    .gl-textbox-label { color: $textbox-border-color-error; }
+  }
+  &.label-static:not(.label-float).has-error.on-focus {
+    .gl-textbox-label { color: $textbox-error-color; }
+  }
+}
+.gl-button {
+  border: none;
+  border-radius: 2px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  min-width: 88px;
+  &.full-width { width: 100% }
+}
+.gl-title {
+  text-align: center;
+  h1 {
+    font-size: 26px;
+  }
+  h2 {
+    font-size: 21px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  h5 {
+    font-size: 12px;
+  }
+  h6 {
+    font-size: 10px;
+  }
+}
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+    height: 100%;
+    width: 100%;
+    body {
+        font-size: 14px;
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        * {
+            box-sizing: border-box;
+        }
+        .glacier {
+            height: 100%;
+            width: 100%;
+            .gl-board {
+                border: none;
+                border-radius: 5px;
+                min-height: 50px;
+                min-width: 50px;
+                overflow: hidden;
+                position: relative;
+            }
+            .gl-effect {
+                &.shadow-0 {
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                }
+                &.shadow-1 {
+                    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02);
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02);
+                    &.shadow-border {
+                        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .01);
+                        box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .02), 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02);
+                    }
+                }
+                &.shadow-2 {
+                    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .05);
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .05);
+                    &.shadow-border {
+                        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .05);
+                        box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .02), 0 2px 4px 0 rgba(0, 0, 0, .01), 0 3px 6px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .05);
+                    }
+                }
+                &.shadow-3 {
+                    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .04), 0 12px 24px 0 rgba(0, 0, 0, .09);
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .04), 0 12px 24px 0 rgba(0, 0, 0, .09);
+                    &.shadow-border {
+                        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .04), 0 12px 24px 0 rgba(0, 0, 0, .09);
+                        box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .02), 0 2px 4px 0 rgba(0, 0, 0, .02), 0 6px 12px 0 rgba(0, 0, 0, .04), 0 12px 24px 0 rgba(0, 0, 0, .09);
+                    }
+                }
+                &.shadow-4 {
+                    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .05), 0 8px 16px 0 rgba(0, 0, 0, .08), 0 20px 40px 0 rgba(0, 0, 0, .15);
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .05), 0 8px 16px 0 rgba(0, 0, 0, .08), 0 20px 40px 0 rgba(0, 0, 0, .15);
+                    &.shadow-border {
+                        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .05), 0 8px 16px 0 rgba(0, 0, 0, .08), 0 20px 40px 0 rgba(0, 0, 0, .15);
+                        box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .02), 0 2px 4px 0 rgba(0, 0, 0, .05), 0 8px 16px 0 rgba(0, 0, 0, .08), 0 20px 40px 0 rgba(0, 0, 0, .15);
+                    }
+                }
+                &.shadow-5 {
+                    -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1), 0 10px 20px 0 rgba(0, 0, 0, .1), 0 30px 60px 0 rgba(0, 0, 0, .2);
+                    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1), 0 10px 20px 0 rgba(0, 0, 0, .1), 0 30px 60px 0 rgba(0, 0, 0, .2);
+                    &.shadow-border {
+                        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .1), 0 5px 10px 0 rgba(0, 0, 0, .1), 0 10px 20px 0 rgba(0, 0, 0, .1), 0 30px 60px 0 rgba(0, 0, 0, .2);
+                        box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1), 0 0.5px 0.5px 0.5px rgba(0, 0, 0, .02), 0 5px 10px 0 rgba(0, 0, 0, .1), 0 10px 20px 0 rgba(0, 0, 0, .1), 0 30px 60px 0 rgba(0, 0, 0, .2);
+                    }
+                }
+            }
+        }
+    }
+}
