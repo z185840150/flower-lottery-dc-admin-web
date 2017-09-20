@@ -2,7 +2,7 @@
 @import url("https://fonts.cat.net/css?family=Fredericka+the+Great");
 @import url("https://fonts.cat.net/css?family=Josefin+Sans");
 
-#login {
+#auth {
   border-radius: 0;
   box-shadow: 0 0 50px 10px rgba(0, 0, 0, .25);
   height: 100%;
@@ -11,6 +11,18 @@
   position: relative;
   top: 0;
   min-width: 250px;
+  .v-code {
+    position: relative;
+    img {
+      background: transparent;
+      cursor: pointer;
+      height: 46px;
+      position: absolute;
+      right: 0px;
+      top: 2px;
+      width: auto;
+    }
+  }
   .logo {
     margin-bottom: 20px;
     img {
@@ -45,5 +57,14 @@
         color: #000
       }
     }
+  }
+  #auth-fotter {
+    bottom: 30px;
+    left: 0;
+    padding: 0px 30px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 999;
   }
 }

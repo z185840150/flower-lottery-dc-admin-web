@@ -6,28 +6,35 @@
 <template lang="pug">
   div#app.glacier
     div.gl-wallpaper(ref="wallpaper") !{`<img ref="wallpaperImage" />`}
-    div#login.gl-board.gl-effect.shadow-5(ref="panel")
-      div.logo
-        img(src="./assets/imgs/logo-big.png")
-      div.gl-title.larger.white
-        h1.title- WELCOME
-        h1.title- 竞彩数据中心
-        h5.title- Minimal Admin Theme
+    div#auth.gl-board.gl-effect.shadow-5(ref="panel")
       div.gl-blur !{`<div class="gl-blur-mask" /><canvas class="gl-blur-canvas" ref="panelBlurCanvas"/>`}
-      GlTextBox(label="请输入账号", v-model="username", :labelFloat="true", :canParse="false")
-      GlTextBox(label="请输入密码", v-model="password", :labelFloat="true", type="password")
-
-      GlButton(label="登录", :fullWidth="true" mode="flat")
-      GlButton(label="密码", :fullWidth="true")
-      router-view
+      div#auth-logo
+        div.logo !{`<img src="./assets/imgs/logo-big.png" />`}
+        div.gl-title.larger.white
+          h1.title- 竞彩数据中心管理平台
+          h5.title- Sport Lottory Data Center Manager
+      router-view#auth-body
+      div#auth-fotter
+        GlLink(label="法律声明", link="#")
+        GlLink(label="免责声明", link="#")
+        GlLink(label="网站地图", link="#")
+        GlLink(label="联系客服", link="#")
+        GlLink(label="最新动态", link="#")
+        GlLink(label="加入团队", link="#")
+        GlLink(label="关于我们", link="#")
+        br
+        GlLink(label="Copy Right 2017-2018 Flower® China", link="#")
+        br
+        GlLink(label="沪ICP备14046347号-1", link="#")
 </template>
 <script>
 import GlButton from './../../components/glacier/GlButton'
+import GlLink from './../../components/glacier/GlLink'
 import GlTextBox from './../../components/glacier/GlTextBox'
 
 import { windowSize } from './../../util'
 export default {
-  components: { GlButton, GlTextBox },
+  components: { GlButton, GlLink, GlTextBox },
   mounted () {
     window.onresize = window.onload = this.handleWindowOnResize
     this.setWallpaper()
@@ -38,18 +45,21 @@ export default {
   },
   data () {
     return {
-      wallpaperSize: { width: 0, height: 0 },
-      username: '',
-      password: ''
+      wallpaperSize: { 
+        width: 0,
+        height: 0
+      }
     }
   },
   methods: {
+    /** Window onResize 事件绑定 */
     handleWindowOnResize() { 
       this.$store.state.base.window.size = windowSize() 
     },
+    /** 设置壁纸 */
     setWallpaper () {
       this.$refs.wallpaperImage.crossOrigin = 'Anonymous'
-      this.$refs.wallpaperImage.src = require('./assets/imgs/texture_abstraction_paint_surface_116962_3840x2400.jpg')
+      this.$refs.wallpaperImage.src = require('./assets/imgs/mountains_peaks_snow_116990_4745x3163.jpg')
       this.$refs.wallpaperImage.onload = () => {
         this.wallpaperSize = {
           width: this.$refs.wallpaperImage.naturalWidth,
@@ -59,6 +69,7 @@ export default {
         this.coverWallpaper()
       }
     },
+    /** 壁纸范围尺寸调整 */
     coverWallpaper () {
       this.$refs.panel.style.width = `${this.$store.state.base.panel.width}px`
       if (this.wallpaperSize.width <= 0 || this.wallpaperSize.height <= 0) return

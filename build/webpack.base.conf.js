@@ -45,8 +45,12 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
+        loader: [
+          {
+            loader: 'vue-loader',
+            options: vueLoaderConfig
+          }
+        ]
       },
       {
         test: /\.js$/,
@@ -54,29 +58,37 @@ module.exports = {
         include: [resolve('src'), resolve('test')]
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,
         loader: [
-          {
-            loader: 'file-loader',
-            query: {
-              name: 'imgs/[hash:7].[ext]'
-            }
+          { loader: 'file-loader',
+            query: { name: 'imgs/[hash:7].[ext]' }
           }, {
             loader: 'image-webpack-loader',
             query: {
-              progressive: true,
-              // optimizationLevel: 7,
-              // interlaced: false,
+              gifsicle: {
+                interlaced: false
+              },
+              optipng: {
+                optimizationLevel: 7
+              },
               pngquant: {
                 quality: '65-90',
                 speed: 4
+              },
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // Specifying webp here will create a WEBP version of your JPG/PNG images
+              webp: {
+                quality: 75
               }
             }
           }
         ]
       },
       {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac|hdr)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,

@@ -12,6 +12,7 @@ $primary-color-dark: false !default;
 $error-color: #FE2424 !default;
 $error-color-light: false !default;
 $error-color-dark: false !default;
+$border-color: #dfe6ec;
 
 @if not $primary-color-light {
   $primary-color-light: lighten($primary-color, 15%);
@@ -28,7 +29,6 @@ $error-color-dark: false !default;
 
 // Font
 @import url('./../../components/glacier/font/iconfont.scss');
-
 
 // Animate
 $transition-default: 0.33s;
@@ -48,13 +48,37 @@ $textbox-border-radius: 5px;
 $textbox-error-color: $error-color;
 $textbox-line-color: $primary-color;
 
-
 $textbox-float-label-color: rgba(0, 0, 0, .55);
 $textbox-float-label-color-focus: $primary-color;
 $textbox-float-label-scale-focus: 0.85;
 $textbox-float-border-color-error: rgba(254, 36, 36, 0.55);
 $textbox-float-line-color: $textbox-float-label-color-focus;
 $textbox-float-line-color-error: #F64840;
+
+@keyframes wave-ripple {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.0);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5)
+  }
+}
+@keyframes wave-ripple-focus {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(0.4);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
 
 // resize
 h1, h2, h3, h4, h5, h6 {
@@ -310,11 +334,75 @@ h1, h2, h3, h4, h5, h6 {
 .gl-button {
   border: none;
   border-radius: 2px;
+  cursor: pointer;
   display: inline-block;
   height: 36px;
   line-height: 36px;
+  margin: 5px 0;
   min-width: 88px;
+  outline: none;
+  padding: 0;
   &.full-width { width: 100% }
+  &[mode="flat"] {
+    background-color: transparent;
+    transition: $transition-default-all;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1)
+    }
+  }
+  .waves-ripple-focus {
+    animation: wave-ripple-focus 2.0s infinite;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    position: absolute;
+    transition: all 0.5s;
+    z-index: -1;
+  }
+  &.waves-effect {
+    overflow: hidden;
+    position: relative
+  }
+  .waves-ripple {
+    animation: wave-ripple 0.5s ease-in-out forwards;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    position: absolute;
+    transition: all 0.5s;
+    z-index: -1;
+    &.fade-out {
+      transition: all 0.5s;
+      opacity: 0;
+    }
+  }
+}
+.gl-link {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: none;
+  cursor: default;
+  display: inline-block;
+  line-height: 32px;
+  padding: 0 12px;
+  transition: $transition-default-all;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  > a {
+    border: none;
+    color: #000;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+  }
+  > a:hover {
+    color: #2196f3;
+    text-decoration: underline;
+  }
 }
 .gl-title {
   text-align: center;
@@ -335,6 +423,61 @@ h1, h2, h3, h4, h5, h6 {
   }
   h6 {
     font-size: 10px;
+  }
+}
+.gl-table-div {
+  border: 1px solid $border-color;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  &::before {
+    height: 40px;
+    content: '';
+    display: block;
+  }
+  .gl-table-group {
+    float: left;
+    overflow-x: scroll;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    &.placeholder {
+      height: 40px;
+      position: relative;
+      opacity: 0;
+      z-index: -1;
+    }
+    &.fixed {
+      overflow: hidden;
+      position: absolute;
+      width: auto;
+      z-index: 2;
+      &.fixed-left { 
+        border-right: 1px solid $border-color;
+        box-shadow: 50px 0 100px rgba(0, 0, 0, 0.1);
+        left: 0; 
+      }
+      &.fixed-right { 
+        box-shadow: -50px 0 100px rgba(0, 0, 0, 0.1);
+        right: 0 
+      }
+    }
+    .gl-table-columns {
+      line-height: 40px;
+      white-space: nowrap;
+      .gl-table-column {
+        background: #fff;
+        display: inline-block;
+        border-left: 1px solid $border-color;
+        cursor: default;
+        height: 40px;
+        padding: 0 15px;
+        text-align: center;
+        //&:not(.fixed-hidden):nth-child() { border-left: none; }
+        &.fixed-hidden { opacity: 0; }
+      }
+    }
   }
 }
 html {

@@ -1,0 +1,371 @@
+@import url('https://cdn.bootcss.com/weather-icons/2.0.10/css/weather-icons.min.css');
+@import url('https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+$active-bg-color: #FF3535;
+$active-bg-color-dark: #FD3E3E;
+
+body {
+  overflow: scroll
+}
+#app {
+  overflow: scroll
+}
+
+#app-header {
+  height: 80px;
+  margin: 0 auto;
+  width: 1180px;
+  .logo {
+    float: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%)
+  }
+  .usr-panel {
+    float: right;
+    position: relative;
+    top: 50%;
+    margin-top: 10px;
+    transform: translateY(-50%)
+  }
+}
+#app-header-nav {
+  background: $active-bg-color;
+  .el-menu.nav-menu {
+    background: transparent;
+    margin: 0 auto;
+    width: 1180px;
+    .el-menu-item {
+      border: none!important;
+      color: #fff;
+      height: 40px;
+      line-height: 40px;
+      &:hover { color: $active-bg-color }
+    }
+    .el-submenu {
+      border: none!important;
+      .el-submenu__title {
+        border: none!important;
+        color: #fff;
+        height: 40px;
+        line-height: 40px;
+        .el-submenu__icon-arrow { color: #fff; }
+        &:hover, &:hover .el-submenu__icon-arrow { color: $active-bg-color; background: #fff; }
+      }
+      &.is-opened {
+        .el-submenu__title, .el-submenu__icon-arrow {
+          color: $active-bg-color;
+        }
+      }
+      .el-menu {
+        top: 45px;
+        .el-menu-item-group {
+          .el-menu-item-group__title {
+            color: #999;
+            cursor: default;
+            padding: 0;
+            line-height: 40px;
+          }
+          .el-menu-item {
+            color: #495060;
+            padding-left: 20px;
+            transition: all 500ms;
+          }
+          .el-menu-item:hover {
+            background: $active-bg-color;
+            color: #fff;
+            transition: all 0ms;
+          }
+        }
+        
+        
+      }
+    }
+    >.ivu-menu-submenu {
+      z-index: 999;
+    }
+    >.ivu-menu-item, .ivu-menu-submenu {
+      border: none;
+      border-top: 2px solid transparent;
+      color: #fff;
+      font-weight: bolder;
+    }
+    >.ivu-menu-item-active, >:hover {
+      color: $active-bg-color;
+      background: #fff;
+      border: none;
+      border-top: 2px solid $active-bg-color;
+    }
+    .ivu-menu-item-group {
+      .ivu-menu-item {
+        padding-right: 80px;
+        transition: all 500ms;
+        &.ivu-menu-item-active, &:hover {
+          background: $active-bg-color;
+          color: #fff;
+          transition: all 0ms;
+          .ivu-tag {
+            background: #fff;
+            color: $active-bg-color;
+          }
+        }
+        .ivu-tag {
+          background: $active-bg-color;
+          cursor: default;
+          font-size: 10px;
+          height: 16px;
+          line-height: 16px;
+          padding: 0 2px;
+          position: absolute;
+          right: 10px;
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+  .ivu-menu-horizontal {
+    height: 40px;
+    line-height: 40px;
+  }
+}
+#app-workspace {
+  margin: 10px auto;
+  width: 1180px;
+}
+#app-footers {
+  background: #f5f5f5;
+  font-size: 12px;
+  >.panel {
+    min-height: 100px;
+    margin: 0 auto;
+    width: 1180px;
+  }
+  >.link-panel {
+    font-size: 12px;
+    padding: 15px 0;
+    .ivu-col {
+      text-align: center;
+      > * {
+        padding: 5px 0;
+      }
+    }
+  }
+  >.footers-panel {
+    border-top: 1px solid #cecece;
+    padding: 20px 0;
+    text-align: center;
+    .warning {
+      color: $active-bg-color;
+      font-weight: bolder;
+      font-size: 18px;
+    }
+    p {
+      color: #303030;
+      padding: 2px 0;
+    }
+    a {
+      color: #2A78FF;
+      font-weight: bolder;
+      padding: 0 10px;
+    }
+    a.link {
+      padding: 0;
+    }
+  }
+}
+#play_methods {
+  #football {
+    .fb-header-nav.el-menu {
+      background: transparent;
+      border-radius: 0;
+      .el-menu-item {
+        border: 1px solid $active-bg-color;
+        border-bottom: none;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background: transparent;
+        color: $active-bg-color;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 5px;
+        &:hover, &.is-active {
+          background: $active-bg-color;
+          color: #fff;
+        }
+        &.is-active { font-weight: bolder; }
+      }
+    }
+    .fb-detail {
+      border: 1px solid $active-bg-color;
+      border-top: none;
+      border-radius: 5px;
+      border-top-left-radius: 0;
+      overflow: hidden;
+      min-height: 100px;
+      .fb-detail-sort {
+        background: $active-bg-color;
+        color: #fff;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        .el-dropdown {
+          color: #fff;
+        }
+        .el-checkbox {
+          .el-checkbox__input {
+            .el-checkbox__inner {
+              border: 1px solid transparent;
+            }
+            &.is-checked {
+              .el-checkbox__inner {
+                border: 1px solid #fff;
+                background-color: $active-bg-color;
+              }
+            }
+          }
+          
+          .el-checkbox__label {
+            color: #fff;
+          }
+        }
+        .sort-link {
+          color: #fff;
+          cursor: pointer;
+          font-size: 12px;
+          margin: 0 5px;
+          &:hover {
+            border-bottom: 1px solid #fff;
+            font-weight: bolder;
+          }
+        }
+        .sort-label {
+          cursor: default;
+          font-size: 12px;
+          margin: 0 5px;
+        }
+        .sort-bar-btn {
+          cursor: pointer;
+          border-radius: 50%;
+          line-height: 20px;
+          width: 20px;
+          height: 20px;
+          text-align: center;
+          transition: all 300ms;
+          &:hover {
+            background: #fff;
+            color: $active-bg-color;
+          }
+        }
+      }
+      .fb-detail-data {
+        .el-table {
+          cursor: default;
+          .el-table__fixed { box-shadow: 50px 0 100px rgba(0, 0, 0, 0.1) }
+          .el-table__fixed-right { box-shadow: -50px 0 100px rgba(0, 0, 0, 0.1) }
+          .cell { text-align: center }
+          .el-table__row {
+            .cell {
+              .league-name-text {
+                color: #fff;
+                font-size: 14px;
+                font-weight: bolder;
+                height: 100%;
+                line-height: 47px;
+                overflow-wrap: normal;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: center;
+                width: 100%;
+              }
+              .weather-icon {
+                margin-right: 5px;
+              }
+              .teams-name {
+                font-size: 14px;
+                position: relative;
+                .team-mark {
+                  color: #606060;
+                  cursor: default;
+                  position: absolute;
+                  &.mark-h { left: 0px; }
+                  &.mark-a { right: 0px; }
+                }
+                .team-names-link {
+                  color: #000;
+                  cursor: pointer;
+                  font-weight: bolder;
+                  width: 100%;
+                  .team-name {
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    width: 50%;
+                    &.name-h { padding-right: 15px; text-align: right; }
+                    &.name-a { padding-left: 15px; text-align: left; }
+                  }
+                  .team-vs {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                  }
+                  &:hover { color: $active-bg-color; }
+                }
+              }
+            }
+          }
+        }
+        .league-name-text {
+          width: 100%;
+          height: 100%;
+          color: #fff;
+          line-height: 47px;
+          font-size: 14px;
+          font-weight: bolder;
+        }
+        .ivu-table {
+          .ivu-table-row {
+            //.match-weather {}
+            td.league-name .ivu-table-cell {
+              width: 100%;
+              height: 100%;
+              padding: 0;
+              .league-name-text {
+                width: 100%;
+                height: 100%;
+                color: #FFFFFF;
+                line-height: 47px;
+                font-size: 14px;
+                font-weight: bolder;
+              }
+            }
+          }
+        }
+        .ivu-table-fixed {
+          box-shadow: 10px 0 50px rgba(0, 0, 0, 0.25);
+        }
+        .ivu-table-fixed {
+          box-shadow: 10px 0 50px rgba(0, 0, 0, 0.25);
+        }
+        .ivu-table-fixed-right {
+          box-shadow: -10px 0 50px rgba(0, 0, 0, 0.25);
+        }
+      }
+      .fb-detail-ctrl {
+        background: #777;
+        height: 80px;
+      }
+      .fb-detail-helper {
+        background: #f2f2f2;
+        color: #333;
+        padding: 15px;
+        .helper-title {
+          font-weight: bolder;
+          margin-bottom: 10px;
+        }
+        .warning {
+          color: $active-bg-color
+        }
+      }
+    }
+  }
+}
